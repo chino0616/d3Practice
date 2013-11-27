@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body   { background: #261822; }			
+svg    { background-color: #F6E497; }	
+circle { fill: #CC1E2C; }	
+</style>
+<!--style勿寫註解 style會無法正確讀取  -->
+<!--style第一行  設定背景顏色  -->
+<!--style第二行  設定svg畫布顏色  or 任何標籤是svg的background-color參數-->
+<!--style第三行  設定circle物件顏色 or 任何標籤是circle的fill參數 -->	
+<body>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<!--  引入最新版d3  -->
+<script>
+var svg = d3.select("body")
+  .append("svg")				<!--  在body內加入<svg></svg>  -->
+    .attr("width", 800)
+    .attr("height", 500);
+	<!--  設定svg佈景大小  <svg ></svg> -->
+
+var data = [{"x": 150, "y": 250}, {"x": 400, "y": 250}, {"x": 650, "y": 250}];
+
+var circle =svg.selectAll("circle")
+    .data(data)
+  .enter().append("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", 75)
+	.attr("stroke-width", 3)
+	.attr("stroke", "blue");
+
+</script>
