@@ -28,10 +28,9 @@ var svg = d3.select("body")
 var data = [{"x": 150, "y": 250}, {"x": 400, "y": 250}, {"x": 650, "y": 250}];
 
 var rect =svg.selectAll("rect")
-    .data(data)
   .enter().append("rect")
-    .attr("x", function(ds) { return ds.x; })
-    .attr("y", function(ds) { return ds.y; })
+    .attr("x", function(d) { return d.x; })
+    .attr("y", function(d) { return d.y; })
     .attr("rx", 10)
     .attr("ry", 7)
 	.attr("width",77)

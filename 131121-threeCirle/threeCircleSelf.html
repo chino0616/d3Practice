@@ -29,5 +29,5 @@ var circle =svg.selectAll("circle")
     .attr("r", 75)
 	.attr("stroke-width", 3)
 	.attr("stroke", "blue");
-
+svg.append("path").attr("d",function(d){return line(d)+"Z";});
 </script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body   { background: #CBD4CF; }			
+svg    { background-color: #FFAE83; }	
+circle { fill: #FEBAA7; }	
+rect { fill: #FF2F25; stroke: #4D1B41;}	
+
+
+</style>
+<!--style勿寫註解 style會無法正確讀取  -->
+<!--style第一行  設定背景顏色  -->
+<!--style第二行  設定svg畫布顏色  or 任何標籤是svg的background-color參數-->
+<!--style第三行  設定circle物件顏色 or 任何標籤是circle的fill參數 -->	
+<body>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<!--  引入最新版d3  -->
+	<svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg">
+
+
+	</svg>
+<script>
+var svg = d3.select("body")
+  .select("svg")				<!--  在body內加入<svg></svg>  -->
+    .attr("width", "100%")
+    .attr("height", "100%");
+	<!--  設定svg佈景大小  <svg ></svg> -->
+var data = [{"x": 150, "y": 250}, {"x": 400, "y": 250}, {"x": 650, "y": 250}];
+
+var ellipse =svg.selectAll("ellipse")
+    .data(data)
+  .enter().append("ellipse")
+    .attr("cx", function(ds) { return ds.x; })
+    .attr("cy", function(ds) { return ds.y; })
+    .attr("rx", 100)
+    .attr("ry", 70)
+	.attr("opacity", "0.4");
+	
+</script>
