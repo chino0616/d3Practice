@@ -39,6 +39,14 @@
    }(document, /*debug*/ false));
 </script>
 <div id="fb-root"> </div>
+<script>
+// Only works after `FB.init` is called
+function myFacebookLogin() {
+  FB.login(function(){}, {scope: 'publish_actions'});
+}
+</script>
+<button onclick="myFacebookLogin()">Login with Facebook</button>
+
 <div class="fb-like"> </div>
     <section class="page-header">
       <h1 class="project-name">D3practice</h1>
