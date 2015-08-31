@@ -1,3 +1,6 @@
+{
+ "name": "flare",
+ "children": [
   {
   "name": "cluster",
      "children": [
@@ -7,3 +10,5 @@
       {"name": "MergeEdge", "size": 743}
      ]
   }
+ ]
+}
