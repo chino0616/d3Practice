@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-
 rect {
   fill: none;
   stroke: #fff;
 }
-
 text {
   font: 10px sans-serif;
 }
-
 </style>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
-
 var width = 960,
     height = 500,
     color = d3.scale.category20c();
-
+var colorScale = d3.scale.linear()
+    .range(['lightgreen', 'darkgreen']) // or use hex values
+    .domain([minValue, maxValue]);
 	
 var treemap = d3.layout.treemap()
     .padding(4)
     .size([width, height])
     .value(function(d) { return d.size; });
-
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(-.5,-.5)");
-
-d3.json("flare.json", function(error, root) {
+d3.json("flare.json", function(error, json) {
   if (error) throw error;
-
-  div.selectAll(".node")
-      .data(treemap.nodes(root))
-    .enter().append("div")
-      .attr("class", "node")
-      .style("left", function(d) { return d.x + "px"; })
-      .style("top", function(d) { return d.y + "px"; })
-      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
-      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; })
-      .style("background", function(d) { return d.children ? color(d.name) : null; })
+  var cell = svg.data([json]).selectAll("g")
+      .data(treemap.nodes)
+    .enter().append("g")
+      .attr("class", "cell")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  cell.append("rect")
+      .attr("width", function(d) { return d.dx; })
+      .attr("height", function(d) { return d.dy; })
+      .style("fill", function(d) {return colorScale(d.value)});
+  cell.append("text")
+      .attr("x", function(d) { return d.dx / 2; })
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
       .text(function(d) { return d.children ? null : d.name; });
 });
-
 </script>
