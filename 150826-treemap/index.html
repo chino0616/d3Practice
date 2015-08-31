@@ -21,7 +21,7 @@ var width = 960,
     color = d3.scale.category20c();
 var colorScale = d3.scale.linear()
     .range(['lightgreen', 'darkgreen']) // or use hex values
-    .domain([3, 300]);
+    .domain([minValue, maxValue]);
 	
 var treemap = d3.layout.treemap()
     .padding(4)
@@ -46,8 +46,8 @@ d3.json("flare.json", function(error, json) {
   cell.append("rect")
       .attr("width", function(d) { return d.dx; })
       .attr("height", function(d) { return d.dy; })
-      .style("fill", function(d) {return colorScale(d.value)});
-
+      .style("fill", function(d) { return d.children ? color(d.name) : null; });
+return colorScale(d.value)
   cell.append("text")
       .attr("x", function(d) { return d.dx / 2; })
       .attr("y", function(d) { return d.dy / 2; })
